@@ -11,6 +11,8 @@ class FetchFirestore extends StatefulWidget {
 }
 
 class FetchFirestoreState extends State<FetchFirestore> {
+  int age = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +45,8 @@ class FetchFirestoreState extends State<FetchFirestore> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     final record = Record.fromSnapshot(data);
+    age = record.agepersonne;
+    print(age);
 
     return Padding(
       key: ValueKey(record.nom),
@@ -61,27 +65,39 @@ class FetchFirestoreState extends State<FetchFirestore> {
     return ListTile(
       isThreeLine: true,
       title: Text(record.nom),
-      subtitle: Text('${record.prenom}\n${record.agepersonne}'),
-      trailing: _trailing(context, data),
-      onTap: () => print(record),
+      subtitle: Text('${record.prenom}\n$age'),
+      trailing: _trailing(context),
+      onTap: () => print(age),
     );
   }
 
-  Widget _trailing(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
+  Widget _trailing(BuildContext context) {
+    //final record = Record.fromSnapshot(data);
     return Container(
         child: GestureDetector(
-      onTap: () => _increaseAge(data),
+      onTap: () => {
+        _increaseAge(),
+        //print(_increaseAge(age)),
+      },
       child: Container(
         child: Icon(Icons.add_circle),
       ),
     ));
   }
 
-  int _increaseAge(DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
-    record.agepersonne++;
-    print(record.agepersonne);
-    return record.agepersonne;
+  void _increaseAge() {
+    setState(() {
+      age++;
+    });
+
+    print('age: ${age.toString()}');
+  }
+
+  void _setAge(int age) {
+    setState(() {
+      this.age = age;
+    });
+
+    print('age: ${age.toString()}');
   }
 }
