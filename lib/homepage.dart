@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forms_restapi/dynamic_list.dart';
 import 'package:forms_restapi/fetch_data.dart';
 import 'package:forms_restapi/fetch_firestore.dart';
 import 'package:forms_restapi/mycustomform.dart';
@@ -33,6 +34,10 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => _navigateToFetchFirestore(context),
             child: Text('Fetch Firestore', style: TextStyle(fontSize: 20)),
           ),
+          RaisedButton(
+            onPressed: () => _navigateToDynamicList(context),
+            child: Text('Dynamic List', style: TextStyle(fontSize: 20)),
+          ),
         ]));
   }
 
@@ -57,6 +62,14 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute(
           builder: (context) => FetchFirestore(),
+        ));
+  }
+
+  void _navigateToDynamicList(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ListDisplay(),
         ));
   }
 }
