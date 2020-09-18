@@ -12,6 +12,7 @@ class FetchFirestore extends StatefulWidget {
 
 class FetchFirestoreState extends State<FetchFirestore> {
   int age = 0;
+  Record record;
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,8 @@ class FetchFirestoreState extends State<FetchFirestore> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
-    age = record.agepersonne;
-    print(age);
+    this.record = Record.fromSnapshot(data);
+    print('builListItem: ${record.agepersonne}');
 
     return Padding(
       key: ValueKey(record.nom),
@@ -61,23 +61,23 @@ class FetchFirestoreState extends State<FetchFirestore> {
   }
 
   Widget _listTile(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
+    // final record = Record.fromSnapshot(data);
     return ListTile(
       isThreeLine: true,
-      title: Text(record.nom),
-      subtitle: Text('${record.prenom}\n$age'),
-      trailing: _trailing(context),
-      onTap: () => print(age),
+      title: Text(this.record.nom),
+      subtitle: Text('list Tile: ${record.prenom}\n${record.agepersonne}'),
+      trailing: _trailing(context, data),
+      //onTap: () => print(age),
     );
   }
 
-  Widget _trailing(BuildContext context) {
+  Widget _trailing(BuildContext context, DocumentSnapshot data) {
     //final record = Record.fromSnapshot(data);
     return Container(
         child: GestureDetector(
       onTap: () => {
-        _increaseAge(),
-        //print(_increaseAge(age)),
+        _setAge(),
+        print('trailing: ${record.agepersonne}'),
       },
       child: Container(
         child: Icon(Icons.add_circle),
@@ -85,19 +85,12 @@ class FetchFirestoreState extends State<FetchFirestore> {
     ));
   }
 
-  void _increaseAge() {
+  void _setAge() {
+    //final record = Record.fromSnapshot(data);
     setState(() {
-      age++;
+      this.record.agepersonne++;
     });
 
-    print('age: ${age.toString()}');
-  }
-
-  void _setAge(int age) {
-    setState(() {
-      this.age = age;
-    });
-
-    print('age: ${age.toString()}');
+    print('setAge: ${this.record.agepersonne.toString()}');
   }
 }
