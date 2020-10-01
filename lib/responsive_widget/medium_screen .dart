@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SmallScreen extends StatelessWidget {
+class MediumScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('SmallScreen');
+    print('MediumScreen');
 
     return SingleChildScrollView(
       child: Padding(
@@ -12,7 +12,7 @@ class SmallScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'small screen',
+              'medium screen',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 40,

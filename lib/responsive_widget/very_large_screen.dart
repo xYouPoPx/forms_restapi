@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class LargeScreen extends StatelessWidget {
+class VeryLargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('LargeScreen');
+    print('VeryLargeScreen');
 
     return SizedBox(
       height: 600,
@@ -38,7 +38,7 @@ class LargeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'large screen',
+              'very large screen',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 60,
